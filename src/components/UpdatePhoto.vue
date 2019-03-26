@@ -5,10 +5,10 @@
       <img :src="contact.photo" alt="">
     </figure>
     <form enctype="multipart/form-data">
-      <input type="file" ref="photofile">
-      <div>
-        <button type="button" @click="photoSubmit(contact.no)">수정</button>
-        <button type="button" @click="cancelEvent">취소</button>
+      <input class="form-field" type="file" ref="photofile">
+      <div class="modal__btn-group">
+        <button class="btn btn--success" type="button" @click="photoSubmit(contact.no)">수정</button>
+        <button class="btn btn--danger" type="button" @click="cancelEvent">취소</button>
       </div>
     </form>
   </div>
@@ -33,15 +33,31 @@ export default {
 <style lang="scss" scoped>
   .modal {
     display: block;
-    position: absolute;
-    max-width: 80%;
+    top: 50%;
     left: 50%;
     bottom: auto;
-    transform: translateX(-50%);
-    background-color: #fff;
-  }
+    transform: translate(-50%, -50%);
+    text-align: center;
 
-  img {
-    max-width: 100%;
+    figure {
+      // outline: 1px dashed red;
+      overflow: hidden;
+      margin: 20px auto 30px;
+      border-radius: 100%;
+      max-width: 150px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .form-field {
+      display: inline-block;
+      height: auto;
+      padding-left: 0;
+      margin-bottom: 30px;
+      border: 0;
+      border-radius: initial;
+    }
   }
 </style>

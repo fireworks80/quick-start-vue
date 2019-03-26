@@ -1,17 +1,17 @@
 <template>
   <div>
-    <button @click="addContact" type="button">새로운 연락처 추가</button>
+    <button class="btn btn--success" @click="addContact" type="button">새로운 연락처 추가</button>
 
     <div class="list">
       <table>
         <caption>연락처 목록</caption>
         <thead>
           <tr>
-            <th scope="col">이름</th>
-            <th scope="col">전화번호</th>
-            <th scope="col">주소</th>
-            <th scope="col">사진</th>
-            <th scope="col">편집/삭제</th>
+            <th scope="col">Name</th>
+            <th scope="col">Tel</th>
+            <th scope="col">Address</th>
+            <th scope="col">Photo</th>
+            <th scope="col">Mod/Del</th>
           </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@
               <img @click="updatePhoto(contact.no)" :src="contact.photo" alt="">
             </td>
             <td>
-              <button type="button" @click="editContact(contact.no)">편집</button>
-              <button type="button" @click="deleteContact(contact.no)">삭제</button>
+              <button class="btn btn--info" type="button" @click="editContact(contact.no)">편집</button>
+              <button class="btn btn--danger" type="button" @click="deleteContact(contact.no)">삭제</button>
             </td>
           </tr>
         </tbody>
@@ -82,7 +82,19 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+$color-border: #e5e9f2;
+$color-row: #f8f9fa;
 
+  .list {
+    margin-top: 20px;
+    border: 1px solid $color-border;
+    background-color: #fff;
+    text-align: center;
+
+    .btn--info {
+      margin-right: 5px;
+    }
+  }
 
   table {
     width: 100%;
@@ -90,12 +102,30 @@ export default {
     table-layout: fixed;
   }
 
-  th,
+  caption {
+    position: absolute;
+    top: auto;
+    left: -9999em;
+  }
+
+  tr:nth-child(even) {
+    background-color: $color-row;
+  }
+
+  th {
+    padding: 10px 0;
+    border-bottom: 2px solid $color-border;
+    text-align: center;
+    font-weight: normal;
+  }
+
   td {
-    border: 1px solid #000;
+    padding: 5px 0;
+    border-bottom: 1px solid $color-border;
   }
 
   img {
-    max-width: 100%;
+    width: 60px;
+    border-radius: 100%;
   }
 </style>
