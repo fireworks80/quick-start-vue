@@ -1,22 +1,28 @@
 <template>
   <div id="app">
-    <ContactList></ContactList>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ContactList from './components/ContactList'
+// import ContactList from './components/ContactList'
 import CONF from './CONF.js'
 export default {
   name: 'app',
   components: {
-    ContactList
+    // ContactList
   }
 }
 </script>
 
 <style lang="scss">
 $color-blue: #f5f9fc;
+
+@mixin debug($color: red) {
+  outline: 1px dashed $color;
+}
+
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -56,4 +62,36 @@ $btn-kinds: (
     }
   }
 }
+
+.input-group {
+  // @include debug;
+
+  display: flex;
+
+  &__label,
+  &__field {
+    height: 40px;
+    border: solid #ced4da;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 80px;
+    border-width: 1px;
+    background-color: #e9ecef;
+  }
+
+  &__field {
+    flex: 4 1 auto;
+    padding-left: 10px;
+    border-width: 1px 1px 1px 0;
+  }
+}
+
+
+
+
+
 </style>

@@ -15,7 +15,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    fetchContact(state, payload) {
+    [CONF.FETCHCONTACT]: (state, payload) => {
       // console.log(payload);
       state.contactlist = payload
     },
@@ -24,21 +24,36 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    [CONF.FETCHCONTACT]: (store) => {
+    async [CONF.FETCHCONTACT](store) {
       // console.log('fetch: ' + store);
-      axios.get(CONF.FETCH, {
-          params: {
-            pageno: store.state.contactlist.pageno,
-            pagesize: store.state.contactlist.pagesize
-          }
-        })
+      let res = await axios.get(CONF.FETCHLINK, {
+        params: {
+          pageno: store.state.contactlist.pageno,
+          pagesize: store.state.contactlist.pagesize
+        }
+      })
+      store.commit(CONF.FETCHCONTACT, res.data)
+    },
+    [CONF.ADDCONTACT]: (store, payload) => {
+      console.log(payload)
+      axios.post(CONF.ADDLINK, payload)
         .then(res => {
-          // console.log(res);
-          store.commit('fetchContact', res.data);
+          // console.log(res)
+          res.data.status === 'success' ? store.commit(CONF.FETCHCONTACT) : console.log('저장에 실패')
         })
         .catch(err => {
-          console.error('fetch contact err: ' + err);
+          console.log(err)
         });
+    },
+    [CONF.UPDATECONTACT]: (store, payload) => {
+      axios.put(CONF.UPDATELINK.replace('${no}', payload.no), payload)
+        .then(res => {
+          // console.log(res)
+        })
+        .catch(err => {
+          console.error(err)
+        });
+      // console.log(payload)
     },
     pageChange(store, payload) {
       // console.log(payload)

@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2>연락처 관리 앱</h2>
-    <button class="btn btn--success" type="button">새로운 연락처 추가하기</button>
+    <router-link class="btn btn--success" :to="{name: 'add'}">새로운 연락처 추가</router-link>
+    <!-- <button class="btn btn--success" type="button">새로운 연락처 추가하기</button> -->
     <div class="list">
       <table>
         <caption>연락처 리스트</caption>
@@ -23,7 +24,8 @@
               <img :src="contact.photo" alt="">
             </td>
             <td>
-              <button class="btn btn--info" type="button">편집</button>
+              <router-link class="btn btn--info" :to="{name: 'update', params: {no: contact.no}}">편집</router-link>
+              <!-- <button @click="updateContact(contact.no)" class="btn btn--info" type="button">편집</button> -->
               <button class="btn btn--danger" type="button">삭제</button>
             </td>
           </tr>
@@ -101,6 +103,7 @@ $color-gray: #dee2e6;
   }
 
   th {
+    text-align: center;
     border-bottom-width: 2px;
     font-weight: normal;
   }
